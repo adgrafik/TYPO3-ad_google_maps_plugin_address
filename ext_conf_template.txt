@@ -1,6 +1,0 @@
-
-# cat=ad: Google Maps API/basic/100; type=boolean; label=LLL:EXT:ad_google_maps_plugin_address/Resources/Private/Language/locallang_extconf.xml:useMapDrawerForAddress
-useMapDrawerForAddress = 0
-
-# cat=ad: Google Maps API/basic/110; type=string; label=LLL:EXT:ad_google_maps_plugin_address/Resources/Private/Language/locallang_extconf.xml:addToLayerType
-addToLayerType = Tx_AdGoogleMaps_PluginAdapter_LayerBuilder_Marker,Tx_AdGoogleMapsPluginPoly_PluginAdapter_LayerBuilder_Polyline,Tx_AdGoogleMapsPluginPoly_PluginAdapter_LayerBuilder_Polygon
