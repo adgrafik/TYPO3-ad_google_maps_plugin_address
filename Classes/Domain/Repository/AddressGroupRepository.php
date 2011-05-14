@@ -41,17 +41,16 @@ class Tx_AdGoogleMapsPluginAddress_Domain_Repository_AddressGroupRepository exte
 		// Search addresses.
 		$addressRepository = t3lib_div::makeInstance('Tx_AdGoogleMapsPluginAddress_Domain_Repository_AddressRepository');
 		$query = $addressRepository->createQuery();
-		$groupAddresses = $query->matching($query->in('addressgroup.uid', $addressGroups))
+		$addresses = $query->matching($query->in('addressgroup.uid', $addressGroups))
 #			->setOrderings(array('lastName' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING))
 			->execute();
-		$addresses = $groupAddresses;
 		// Search sub groups.
 		$query = $this->createQuery();
 		$addressSubGroups = $query->matching($query->in('parentGroup', $addressGroups))
 #			->setOrderings(array('title' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING))
 			->execute();
 		if (count($addressSubGroups) && $level < 99) {
-			array_merge($addresses, $this->getAddressesRecursively($addressSubGroups, $level++));
+			$addresses = array_merge($addresses, $this->getAddressesRecursively($addressSubGroups, $level++));
 		}
 
 		return $addresses;

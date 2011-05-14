@@ -51,7 +51,7 @@ $TCA['tx_adgooglemaps_domain_model_layer']['columns']['coordinates_provider']['c
 t3lib_extMgm::addToAllTCAtypes(
 	'tx_adgooglemaps_domain_model_layer',
 	'tx_adgooglemapspluginaddress_addresses, tx_adgooglemapspluginaddress_address_groups',
-	$extensionConfiguration['addToLayerType'],
+	$extensionConfiguration['pluginAddress']['addToLayerType'],
 	'after:coordinates_provider'
 );
 
@@ -60,7 +60,7 @@ t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript/', 'ad: Google M
 
 // Add tt_address support.
 if (t3lib_extMgm::isLoaded('tt_address') === TRUE) {
-	if ((boolean) $extensionConfiguration['useMapDrawerForAddress'] === TRUE) {
+	if ((boolean) $extensionConfiguration['pluginAddress']['useMapDrawerForAddress'] === TRUE) {
 		$tempColumns = array(
 			'tx_adgooglemapspluginaddress_coordinates' => array(
 				'exclude' => true,

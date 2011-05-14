@@ -41,7 +41,6 @@ class tx_AdGoogleMapsPluginAddress_Service_AddressPostProcess {
 	 * @return void
 	 */
 	public function processDatamap_postProcessFieldArray($status, $table, $uid, &$fieldArray, $reference) {
-		$extensionConfiguration = Tx_AdGoogleMaps_Utility_BackEnd::getExtensionConfiguration('ad_google_maps_plugin_address');
 		if ($table === 'tt_address' && (
 				array_key_exists('zip', $fieldArray) || 
 				array_key_exists('city', $fieldArray) || 

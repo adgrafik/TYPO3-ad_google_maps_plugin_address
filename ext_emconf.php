@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'ad: Google Maps Plugin Address Coordinates Provider',
-	'description' => 'Extends the extension ad: Google Maps (ad_google_maps) with a coordinates provider for tt_address.',
+	'description' => 'Extends the extension ad: Google Maps (ad_google_maps) with a coordinates provider for tt_address and tt_address_group.',
 	'category' => 'plugin',
 	'shy' => 0,
 	'version' => '1.0.0',
