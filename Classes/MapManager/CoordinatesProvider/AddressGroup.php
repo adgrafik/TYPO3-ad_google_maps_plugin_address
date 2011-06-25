@@ -23,17 +23,12 @@
  ***************************************************************/
 
 /**
- * Coordinates provider for addresses.
+ * Coordinates provider for address group.
  *
  * @version $Id:$
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class Tx_AdGoogleMapsPluginAddress_MapBuilder_CoordinatesProvider_Addresses extends Tx_AdGoogleMaps_MapBuilder_CoordinatesProvider_AbstractCoordinatesProvider {
-
-	/**
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_AdGoogleMapsPluginAddress_Domain_Model_Address>
-	 */
-	protected $addresses;
+class Tx_AdGoogleMapsPluginAddress_MapManager_CoordinatesProvider_AddressGroup extends Tx_AdGoogleMapsPluginAddress_MapManager_CoordinatesProvider_Addresses {
 
 	/**
 	 * Loads the data and the coordinates.
@@ -41,40 +36,27 @@ class Tx_AdGoogleMapsPluginAddress_MapBuilder_CoordinatesProvider_Addresses exte
 	 * @return void
 	 */
 	public function load() {
-		$this->loadAddresses();
-		foreach ($this->addresses as $address) {
-			if (($coordinate = $address->getPluginAddressCoordinates())) {
-				$this->data[] = $address->_getCleanProperties();
-				$this->coordinates[] = $coordinate;
-			} else {
-				$addressQuery = $address->getZip() . ' ' . $address->getCity() . ', ' . $address->getCountry() . ', ' . $address->getAddress();
-				if (($coordinate = $this->layerBuilder->getGoogleMapsPlugin()->getCoordinatesByAddress($addressQuery)) !== NULL) {
-					$address->setPluginAddressCoordinates($coordinate);
-					$this->data[] = $address->_getCleanProperties();
-					$this->coordinates[] = $coordinate;
-				}
-			}
-		}
+		parent::load();
 	}
 
 	/**
-	 * Loads this addresses.
+	 * Loads the data and the coordinates.
 	 *
 	 * @return void
 	 */
-	protected function loadAddresses() {
-		// Get addresses of layer if $this->addresses wasn't set by the coordinates provider of address group.
+	public function loadAddresses() {
 		$layer = $this->layerBuilder->getLayer();
+		// Load addresses of address groups and call load of address coordinates provider.
+		$addressGroupRepository = t3lib_div::makeInstance('Tx_AdGoogleMapsPluginAddress_Domain_Repository_AddressGroupRepository');
 
 		// TODO: Waiting for mixins in extbase.
-//		$this->addresses = $layer->getTxAdgooglemapspluginaddressAddresses();
-
 		$layerRepository = t3lib_div::makeInstance('Tx_AdGoogleMapsPluginAddress_Domain_Repository_LayerRepository');
 		$query = $layerRepository->createQuery();
 		$result = $query->matching($query->equals('uid', $layer->getUid()))->execute();
 
-		$this->addresses = (count($result) > 0 ? $result[0]->getPluginAddressAddresses() : array());
+		$this->addresses = (count($result) > 0 ? $addressGroupRepository->getAddressesRecursively($result[0]->getPluginAddressAddressGroups()) : array());
 	}
+
 }
 
 ?>
