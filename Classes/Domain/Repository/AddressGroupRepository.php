@@ -39,7 +39,7 @@ class Tx_AdGoogleMapsPluginAddress_Domain_Repository_AddressGroupRepository exte
 	 */
 	public function getAddressesRecursively($addressGroups, $level = 0) {
 		// Search addresses.
-		$addressRepository = t3lib_div::makeInstance('Tx_AdGoogleMapsPluginAddress_Domain_Repository_AddressRepository');
+		$addressRepository = $this->objectManager->get('Tx_AdGoogleMapsPluginAddress_Domain_Repository_AddressRepository');
 		$query = $addressRepository->createQuery();
 		$groupAddresses = $query->matching($query->in('addressgroup.uid', $addressGroups))
 #			->setOrderings(array('lastName' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING))

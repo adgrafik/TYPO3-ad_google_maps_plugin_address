@@ -1,3 +1,5 @@
 2011-02-19 Arno Dudek  <webmaster@adgrafik.at>
 
 1.0.0	First release. Moved from ad_google_maps
+
+1.1.0	[TASK] Changed many t3lib_div::makeInstance to the extbase $this->objectManager->create/get.

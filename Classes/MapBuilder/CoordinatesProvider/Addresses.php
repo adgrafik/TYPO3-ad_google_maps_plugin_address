@@ -69,7 +69,7 @@ class Tx_AdGoogleMapsPluginAddress_MapBuilder_CoordinatesProvider_Addresses exte
 		// TODO: Waiting for mixins in extbase.
 //		$this->addresses = $layer->getTxAdgooglemapspluginaddressAddresses();
 
-		$layerRepository = t3lib_div::makeInstance('Tx_AdGoogleMapsPluginAddress_Domain_Repository_LayerRepository');
+		$layerRepository = $this->objectManager->get('Tx_AdGoogleMapsPluginAddress_Domain_Repository_LayerRepository');
 		$query = $layerRepository->createQuery();
 		$result = $query->matching($query->equals('uid', $layer->getUid()))->execute();
 

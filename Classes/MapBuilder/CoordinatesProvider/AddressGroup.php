@@ -47,10 +47,10 @@ class Tx_AdGoogleMapsPluginAddress_MapBuilder_CoordinatesProvider_AddressGroup e
 	public function loadAddresses() {
 		$layer = $this->layerBuilder->getLayer();
 		// Load addresses of address groups and call load of address coordinates provider.
-		$addressGroupRepository = t3lib_div::makeInstance('Tx_AdGoogleMapsPluginAddress_Domain_Repository_AddressGroupRepository');
+		$addressGroupRepository = $this->objectManager->get('Tx_AdGoogleMapsPluginAddress_Domain_Repository_AddressGroupRepository');
 
 		// TODO: Waiting for mixins in extbase.
-		$layerRepository = t3lib_div::makeInstance('Tx_AdGoogleMapsPluginAddress_Domain_Repository_LayerRepository');
+		$layerRepository = $this->objectManager->get('Tx_AdGoogleMapsPluginAddress_Domain_Repository_LayerRepository');
 		$query = $layerRepository->createQuery();
 		$result = $query->matching($query->equals('uid', $layer->getUid()))->execute();
 
