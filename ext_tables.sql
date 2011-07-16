@@ -34,5 +34,6 @@ CREATE TABLE tx_adgooglemapspluginaddress_layer_ttaddressgroup_mm (
 # Table structure for table 'tt_address'
 #
 CREATE TABLE tt_address (
-	tx_adgooglemapspluginaddress_coordinates text
+	tx_adgooglemapspluginaddress_coordinates text,
+	tx_adgooglemapspluginaddress_disable_position_fixing tinyint(4) unsigned DEFAULT '0' NOT NULL
 );

@@ -72,12 +72,22 @@ if (t3lib_extMgm::isLoaded('tt_address') === TRUE) {
 					'userFunc' => 'EXT:ad_google_maps/Classes/MapDrawer/MapDrawerApi.php:tx_AdGoogleMaps_MapDrawer_MapDrawerApi->tx_draw',
 				),
 			),
+			'tx_adgooglemapspluginaddress_disable_position_fixing' => array(
+				'exclude' => true,
+				'label'   => 'LLL:EXT:ad_google_maps_plugin_address/Resources/Private/Language/locallang_tca.xml:tt_address.disablePositionFixing',
+				'config'  => array(
+					'type' => 'check',
+				),
+			),
 		);
 
 		t3lib_div::loadTCA('tt_address');
 		t3lib_extMgm::addTCAcolumns('tt_address', $tempColumns, 1);
-		t3lib_extMgm::addLLrefForTCAdescr('tt_address', 'EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_tca_csh_layer.xml');
-		t3lib_extMgm::addToAllTCAtypes('tt_address', '--div--;LLL:EXT:ad_google_maps/Resources/Private/Language/MapDrawer/locallang.xml:tx_adgooglemaps_mapdrawer.sheetMapDrawer, tx_adgooglemapspluginaddress_coordinates;;;;1-1-1');
+		t3lib_extMgm::addLLrefForTCAdescr('tt_address', 'EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_tca_csh_ttaddress.xml');
+		t3lib_extMgm::addToAllTCAtypes(
+			'tt_address', 
+			'--div--;LLL:EXT:ad_google_maps/Resources/Private/Language/MapDrawer/locallang.xml:tx_adgooglemaps_mapdrawer.sheetMapDrawer, tx_adgooglemapspluginaddress_coordinates, tx_adgooglemapspluginaddress_disable_position_fixing'
+		);
 		$GLOBALS['TCA']['tt_address']['ctrl']['dividers2tabs'] = 2;
 	}
 

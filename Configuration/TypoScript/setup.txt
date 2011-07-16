@@ -12,6 +12,7 @@ config.tx_extbase {
 					columns {
 						addressgroup.foreignClass = Tx_AdGoogleMapsPluginAddress_Domain_Model_AddressGroup
 						tx_adgooglemapspluginaddress_coordinates.mapOnProperty = pluginAddressCoordinates
+						tx_adgooglemapspluginaddress_disable_position_fixing.mapOnProperty = pluginAddressDisablePositionFixing
 					}
 				}
 			}

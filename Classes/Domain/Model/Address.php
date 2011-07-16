@@ -155,6 +155,11 @@ class Tx_AdGoogleMapsPluginAddress_Domain_Model_Address extends Tx_Extbase_Domai
 	protected $pluginAddressCoordinates;
 
 	/**
+	 * @var boolean
+	 */
+	protected $pluginAddressDisablePositionFixing;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {
@@ -617,6 +622,25 @@ class Tx_AdGoogleMapsPluginAddress_Domain_Model_Address extends Tx_Extbase_Domai
 	 */
 	public function getPluginAddressCoordinates() {
 		return $this->pluginAddressCoordinates;
+	}
+
+	/**
+	 * Sets this pluginAddressDisablePositionFixing
+	 *
+	 * @param boolean $pluginAddressDisablePositionFixing
+	 * @return void
+	 */
+	public function setPluginAddressDisablePositionFixing($pluginAddressDisablePositionFixing) {
+		$this->pluginAddressDisablePositionFixing = (boolean) $pluginAddressDisablePositionFixing;
+	}
+
+	/**
+	 * Returns this pluginAddressDisablePositionFixing
+	 *
+	 * @return boolean
+	 */
+	public function getPluginAddressDisablePositionFixing() {
+		return (boolean) $this->pluginAddressDisablePositionFixing;
 	}
 
 }
