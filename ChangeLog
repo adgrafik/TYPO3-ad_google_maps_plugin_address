@@ -2,6 +2,8 @@
 
 1.0.1	[BUGFIX] Fixed query for addresses and address groups. Set setRespectStoragePage to FALSE.
 		[BUGFIX] Fixed Tx_Extbase_Persistence_LazyLoadingStorage to Tx_Extbase_Persistence_LazyLoadingProxy in models.
+		[TASK] Adapted emconf depends
+		[TASK] Set state to stable
 		[FEATUER] Added optional sorting for tt_address columns.
 
 1.0.0	First release. Moved from ad_google_maps
