@@ -4,3 +4,9 @@ useMapDrawerForAddress = 0
 
 # cat=ad: Google Maps API/basic/110; type=string; label=LLL:EXT:ad_google_maps_plugin_address/Resources/Private/Language/locallang_extconf.xml:addToLayerType
 addToLayerType = Tx_AdGoogleMaps_MapBuilder_Layer_Marker,Tx_AdGoogleMapsPluginPoly_MapBuilder_Layer_Polyline,Tx_AdGoogleMapsPluginPoly_MapBuilder_Layer_Polygon
+
+# cat=ad: Google Maps API/basic/120; type=boolean; label=LLL:EXT:ad_google_maps_plugin_address/Resources/Private/Language/locallang_extconf.xml:useRecordStorage
+useRecordStorage = 0
+
+# cat=ad: Google Maps API/basic/130; type=boolean; label=LLL:EXT:ad_google_maps_plugin_address/Resources/Private/Language/locallang_extconf.xml:useSorting
+useSorting = 0

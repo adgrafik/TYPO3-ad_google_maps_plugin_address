@@ -1,3 +1,6 @@
+#
+# Table structure for table 'tx_adgooglemaps_domain_model_layer'
+#
 CREATE TABLE tx_adgooglemaps_domain_model_layer (
 	tx_adgooglemapspluginaddress_addresses int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_adgooglemapspluginaddress_address_groups int(11) unsigned DEFAULT '0' NOT NULL,
@@ -35,5 +38,5 @@ CREATE TABLE tx_adgooglemapspluginaddress_layer_ttaddressgroup_mm (
 #
 CREATE TABLE tt_address (
 	tx_adgooglemapspluginaddress_coordinates text,
-	tx_adgooglemapspluginaddress_disable_position_fixing tinyint(4) unsigned DEFAULT '0' NOT NULL
+	sorting int(11) unsigned DEFAULT '0' NOT NULL
 );

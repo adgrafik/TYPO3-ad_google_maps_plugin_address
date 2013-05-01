@@ -145,7 +145,6 @@ class Tx_AdGoogleMapsPluginAddress_Domain_Model_Address extends Tx_Extbase_Domai
 
 	/**
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_AdGoogleMapsPluginAddress_Domain_Model_AddressGroup>
-	 * @lazy
 	 */
 	protected $addressgroup;
 
@@ -153,11 +152,6 @@ class Tx_AdGoogleMapsPluginAddress_Domain_Model_Address extends Tx_Extbase_Domai
 	 * @var string
 	 */
 	protected $pluginAddressCoordinates;
-
-	/**
-	 * @var boolean
-	 */
-	protected $pluginAddressDisablePositionFixing;
 
 	/**
 	 * Constructor.
@@ -622,25 +616,6 @@ class Tx_AdGoogleMapsPluginAddress_Domain_Model_Address extends Tx_Extbase_Domai
 	 */
 	public function getPluginAddressCoordinates() {
 		return $this->pluginAddressCoordinates;
-	}
-
-	/**
-	 * Sets this pluginAddressDisablePositionFixing
-	 *
-	 * @param boolean $pluginAddressDisablePositionFixing
-	 * @return void
-	 */
-	public function setPluginAddressDisablePositionFixing($pluginAddressDisablePositionFixing) {
-		$this->pluginAddressDisablePositionFixing = (boolean) $pluginAddressDisablePositionFixing;
-	}
-
-	/**
-	 * Returns this pluginAddressDisablePositionFixing
-	 *
-	 * @return boolean
-	 */
-	public function getPluginAddressDisablePositionFixing() {
-		return (boolean) $this->pluginAddressDisablePositionFixing;
 	}
 
 }

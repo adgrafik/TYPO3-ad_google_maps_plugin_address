@@ -39,17 +39,30 @@ class Tx_AdGoogleMapsPluginAddress_Domain_Repository_AddressGroupRepository exte
 	 */
 	public function getAddressesRecursively($addressGroups, $level = 0) {
 		// Search addresses.
-		$addressRepository = $this->objectManager->get('Tx_AdGoogleMapsPluginAddress_Domain_Repository_AddressRepository');
+		$extensionConfiguration = Tx_AdGoogleMaps_Utility_BackEnd::getExtensionConfiguration('ad_google_maps_plugin_feuser');
+		$addressRepository = t3lib_div::makeInstance('Tx_AdGoogleMapsPluginAddress_Domain_Repository_AddressRepository');
+
 		$query = $addressRepository->createQuery();
-		$groupAddresses = $query->matching($query->in('addressgroup.uid', $addressGroups))
-#			->setOrderings(array('lastName' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING))
-			->execute();
-		$addresses = $groupAddresses;
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		$query->matching($query->in('addressgroup.uid', $addressGroups));
+
+		if ($extensionConfiguration['useSorting']) {
+			$query->setOrderings(array('sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING));
+		}
+
+		$addresses = $query->execute();
+
 		// Search sub groups.
 		$query = $this->createQuery();
-		$addressSubGroups = $query->matching($query->in('parentGroup', $addressGroups))
-#			->setOrderings(array('title' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING))
-			->execute();
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		$query->matching($query->in('parentGroup', $addressGroups));
+
+		if ($extensionConfiguration['useSorting']) {
+			$query->setOrderings(array('sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING));
+		}
+
+		$addressSubGroups = $query->execute();
+
 		if (count($addressSubGroups) && $level < 99) {
 			array_merge($addresses, $this->getAddressesRecursively($addressSubGroups, $level++));
 		}

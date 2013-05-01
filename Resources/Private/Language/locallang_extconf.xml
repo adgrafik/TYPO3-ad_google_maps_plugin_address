@@ -8,10 +8,14 @@
 		<languageKey index="default" type="array">
 			<label index="useMapDrawerForAddress">Use MapDrawer for tt_address: If set, you can set the geo position of an address in the MapDrawer, else the geo position will be get directly ba geocoder from the address.</label>
 			<label index="addToLayerType">Layer type: Set here the layer types that supports this coordinates provider. This time they are markers, polyline and polygon.</label>
+			<label index="useRecordStorage">Record Storage: If this option is set "record storage" for address and address groups records is used. Can be used to limit record selection.</label>
+			<label index="useSorting">Enable sorting: This Option enables the sorting column for address records in the list view. If sortig is already set (e.g. by another extension) it will be ignored.</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="useMapDrawerForAddress">MapDrawer für tt_address verwenden: Wenn diese Option gesetzt ist, kann die Position der Adressen mit dem MapDrawer gesetzt werden, ansonsten wird die Position direkt per Geocoder aus der Adresse ermittelt.</label>
 			<label index="addToLayerType">Ebenentypen: Setze hier die Ebenentypen die dieser Daten-Provider unterstützt. Zur Zeit sind dies Markierungen, Poyline und Polygon.</label>
+			<label index="useRecordStorage">Allgemeine Datensatzsammlung: Aktiviert die Verwendung von "Allgemeine Datensatzsammlung" für Adress- und Adressgruppen-Datensätze. Kann dazu verwendet werden um Datensätze in der Auswahl zu begrenzen.</label>
+			<label index="useSorting">Aktiviere Sortierung: Diese Option aktiviert die Sortierung der Adress--Datensätze in der Listenansicht. Wenn eine Sortierung bereits existiert (z.B. von einer anderen Extension), dann wird diese Option ignoriert.</label>
 		</languageKey>
 	</data>
 </T3locallang>

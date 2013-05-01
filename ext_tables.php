@@ -21,6 +21,12 @@ $tempColumns = array(
 			'minitems' => 0,
 			'maxitems' => 99,
 			'foreign_table' => 'tt_address',
+			'foreign_table_where' => 'AND NOT tt_address.hidden AND ' . (
+				$extensionConfiguration['useRecordStorage']
+					? 'tt_address.pid = ###STORAGE_PID###'
+					: '( NOT GREATEST( ###PAGE_TSCONFIG_ID###, ###PAGE_TSCONFIG_IDLIST### ) OR tt_address.pid IN( ###PAGE_TSCONFIG_ID###, ###PAGE_TSCONFIG_IDLIST### ) )'
+				
+			),
 			'MM' => 'tx_adgooglemapspluginaddress_layer_ttaddress_mm',
 		),
 	),
@@ -36,6 +42,12 @@ $tempColumns = array(
 			'minitems' => 0,
 			'maxitems' => 99,
 			'foreign_table' => 'tt_address_group',
+			'foreign_table_where' => 'AND NOT tt_address_group.hidden AND ' . (
+				$extensionConfiguration['useRecordStorage']
+					? 'tt_address_group.pid = ###STORAGE_PID###'
+					: '( NOT GREATEST( ###PAGE_TSCONFIG_ID###, ###PAGE_TSCONFIG_IDLIST### ) OR tt_address_group.pid IN( ###PAGE_TSCONFIG_ID###, ###PAGE_TSCONFIG_IDLIST### ) )'
+				
+			),
 			'MM' => 'tx_adgooglemapspluginaddress_layer_ttaddressgroup_mm',
 		),
 	),
@@ -60,6 +72,9 @@ t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript/', 'ad: Google M
 
 // Add tt_address support.
 if (t3lib_extMgm::isLoaded('tt_address') === TRUE) {
+
+	t3lib_div::loadTCA('tt_address');
+
 	if ((boolean) $extensionConfiguration['useMapDrawerForAddress'] === TRUE) {
 		$tempColumns = array(
 			'tx_adgooglemapspluginaddress_coordinates' => array(
@@ -72,23 +87,16 @@ if (t3lib_extMgm::isLoaded('tt_address') === TRUE) {
 					'userFunc' => 'EXT:ad_google_maps/Classes/MapDrawer/MapDrawerApi.php:tx_AdGoogleMaps_MapDrawer_MapDrawerApi->tx_draw',
 				),
 			),
-			'tx_adgooglemapspluginaddress_disable_position_fixing' => array(
-				'exclude' => true,
-				'label'   => 'LLL:EXT:ad_google_maps_plugin_address/Resources/Private/Language/locallang_tca.xml:tt_address.disablePositionFixing',
-				'config'  => array(
-					'type' => 'check',
-				),
-			),
 		);
 
-		t3lib_div::loadTCA('tt_address');
 		t3lib_extMgm::addTCAcolumns('tt_address', $tempColumns, 1);
-		t3lib_extMgm::addLLrefForTCAdescr('tt_address', 'EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_tca_csh_ttaddress.xml');
-		t3lib_extMgm::addToAllTCAtypes(
-			'tt_address', 
-			'--div--;LLL:EXT:ad_google_maps/Resources/Private/Language/MapDrawer/locallang.xml:tx_adgooglemaps_mapdrawer.sheetMapDrawer, tx_adgooglemapspluginaddress_coordinates, tx_adgooglemapspluginaddress_disable_position_fixing'
-		);
+		t3lib_extMgm::addLLrefForTCAdescr('tt_address', 'EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_tca_csh_layer.xml');
+		t3lib_extMgm::addToAllTCAtypes('tt_address', '--div--;LLL:EXT:ad_google_maps/Resources/Private/Language/MapDrawer/locallang.xml:tx_adgooglemaps_mapdrawer.sheetMapDrawer, tx_adgooglemapspluginaddress_coordinates;;;;1-1-1');
 		$GLOBALS['TCA']['tt_address']['ctrl']['dividers2tabs'] = 2;
+	}
+
+	if ((boolean) $extensionConfiguration['useSorting'] === TRUE && !isset($GLOBALS['TCA']['tt_address']['ctrl']['sortby'])) {
+		$GLOBALS['TCA']['tt_address']['ctrl']['sortby'] = 'sorting';
 	}
 
 	// Set post process function for tt_address on change.
